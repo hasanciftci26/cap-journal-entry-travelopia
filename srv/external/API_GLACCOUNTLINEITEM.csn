@@ -1,0 +1,2073 @@
+{
+  "meta": {
+    "creator": "cds-dk 6.3.1"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "API_GLACCOUNTLINEITEM": {
+      "kind": "service",
+      "@cds.external": true,
+      "@m.IsDefaultEntityContainer": "true",
+      "@sap.message.scope.supported": "true",
+      "@sap.supported.formats": "atom json xlsx"
+    },
+    "API_GLACCOUNTLINEITEM.GLAccountLineItem": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.content.version": "1",
+      "@sap.semantics": "aggregate",
+      "@sap.label": "API G/L Account Line Item",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.LargeString",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false",
+          "notNull": true
+        },
+        "SourceLedger": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Source Ledger",
+          "notNull": false
+        },
+        "CompanyCode": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Company Code",
+          "notNull": false
+        },
+        "FiscalYear": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Fiscal Year",
+          "notNull": false
+        },
+        "AccountingDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Journal Entry",
+          "notNull": false
+        },
+        "LedgerGLLineItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Journal Entry Item",
+          "@sap.quickinfo": "Ledger Journal Entry Item",
+          "notNull": false
+        },
+        "Ledger": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Ledger",
+          "@sap.quickinfo": "Ledger in General Ledger Accounting",
+          "notNull": false
+        },
+        "LedgerFiscalYear": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Fiscal Year of Ledger",
+          "notNull": false
+        },
+        "GLRecordType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Record Type",
+          "notNull": false
+        },
+        "ControllingArea": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Controlling Area",
+          "notNull": false
+        },
+        "ChartOfAccounts": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Chart of Accounts",
+          "notNull": false
+        },
+        "GLAccount": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "G/L Account",
+          "notNull": false
+        },
+        "FinancialTransactionType": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Financial Transaction Type",
+          "notNull": false
+        },
+        "BusinessTransactionType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Business Transaction Type",
+          "notNull": false
+        },
+        "ControllingBusTransacType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Business Transaction",
+          "@sap.quickinfo": "CO Business Transaction",
+          "notNull": false
+        },
+        "ReferenceDocumentType": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Reference Document Type",
+          "notNull": false
+        },
+        "LogicalSystem": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Logical System",
+          "notNull": false
+        },
+        "ReferenceDocumentContext": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Reference Document Context",
+          "notNull": false
+        },
+        "ReferenceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Reference document",
+          "@sap.quickinfo": "Reference document number",
+          "notNull": false
+        },
+        "ReferenceDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Reference Document Item",
+          "notNull": false
+        },
+        "ReferenceDocumentItemGroup": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Reference Document Item Group",
+          "notNull": false
+        },
+        "TransactionSubitem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Sub Transaction",
+          "@sap.quickinfo": "Partial Document to be balanced to zero",
+          "notNull": false
+        },
+        "IsReversal": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Is Reversing",
+          "@sap.quickinfo": "Indicator: Item is Reversing Another Item",
+          "notNull": false
+        },
+        "IsReversed": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Is Reversed",
+          "@sap.quickinfo": "Indicator: Item is Reversed",
+          "notNull": false
+        },
+        "ReversalReferenceDocumentCntxt": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Reversal Reference Document Context",
+          "notNull": false
+        },
+        "ReversalReferenceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Reversal Reference Document",
+          "notNull": false
+        },
+        "IsSettlement": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Is Settling",
+          "@sap.quickinfo": "Indicator: Item is Settling or Transferring Another Item",
+          "notNull": false
+        },
+        "IsSettled": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Is Settled",
+          "@sap.quickinfo": "Indicator: Line Item is Settled or Transferred",
+          "notNull": false
+        },
+        "PredecessorReferenceDocType": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Reference Document Type",
+          "notNull": false
+        },
+        "PredecessorReferenceDocCntxt": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Reference Document Context",
+          "notNull": false
+        },
+        "PredecessorReferenceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Reference Document",
+          "notNull": false
+        },
+        "PredecessorReferenceDocItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Predecessor Reference Document Item",
+          "notNull": false
+        },
+        "PrdcssrJournalEntryCompanyCode": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Journal Entry Company Code",
+          "@sap.quickinfo": "Preceding Journal Entry Company Code",
+          "notNull": false
+        },
+        "PrdcssrJournalEntryFiscalYear": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Predecessor Journal Entry Fiscal Year",
+          "@sap.quickinfo": "Preceding Journal Entry Fiscal Year",
+          "notNull": false
+        },
+        "PredecessorJournalEntry": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Journal Entry",
+          "@sap.quickinfo": "Preceding Journal Entry Document Number",
+          "notNull": false
+        },
+        "PredecessorJournalEntryItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Predecessor Journal Entry Item",
+          "@sap.quickinfo": "Preceding Journal Entry Line Item",
+          "notNull": false
+        },
+        "SourceReferenceDocumentType": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Source Reference Document Type",
+          "notNull": false
+        },
+        "SourceLogicalSystem": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Source Logical System",
+          "notNull": false
+        },
+        "SourceReferenceDocumentCntxt": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Source Reference Document Context",
+          "notNull": false
+        },
+        "SourceReferenceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Source Reference Document",
+          "notNull": false
+        },
+        "SourceReferenceDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Source Reference Document Item",
+          "notNull": false
+        },
+        "SourceReferenceDocSubitem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Source Reference Document Subitem",
+          "notNull": false
+        },
+        "IsCommitment": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Is Commitment",
+          "@sap.quickinfo": "Indicator: Is Commitment",
+          "notNull": false
+        },
+        "JrnlEntryItemObsoleteReason": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Obsolete Reason",
+          "@sap.quickinfo": "Journal Entry Item Obsolete Reason",
+          "notNull": false
+        },
+        "JrnlPeriodEndClosingRunLogUUID": {
+          "type": "cds.UUID",
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Closing Run UUID",
+          "@sap.quickinfo": "UUID of Financial Closing Run",
+          "notNull": false
+        },
+        "CostCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Cost Center",
+          "notNull": false
+        },
+        "ProfitCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Profit Center",
+          "notNull": false
+        },
+        "FunctionalArea": {
+          "type": "cds.String",
+          "length": 16,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Functional Area",
+          "notNull": false
+        },
+        "BusinessArea": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Business Area",
+          "notNull": false
+        },
+        "Segment": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Segment",
+          "@sap.quickinfo": "Segment for Segmental Reporting",
+          "notNull": false
+        },
+        "PartnerCostCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Cost Center",
+          "notNull": false
+        },
+        "PartnerProfitCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Profit Center",
+          "notNull": false
+        },
+        "PartnerFunctionalArea": {
+          "type": "cds.String",
+          "length": 16,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Func. Area",
+          "@sap.quickinfo": "Partner Functional Area",
+          "notNull": false
+        },
+        "PartnerBusinessArea": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Bus. Area",
+          "@sap.quickinfo": "Partner Business Area",
+          "notNull": false
+        },
+        "PartnerCompany": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Trading Partner",
+          "@sap.quickinfo": "Company ID of Trading Partner",
+          "notNull": false
+        },
+        "PartnerSegment": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Segment",
+          "@sap.quickinfo": "Partner Segment for Segmental Reporting",
+          "notNull": false
+        },
+        "BalanceTransactionCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Balance Transaction Currency",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInBalanceTransacCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "BalanceTransactionCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Balance Transaction Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "TransactionCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Transaction Currency",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInTransactionCurrency": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "TransactionCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Transaction Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "CompanyCodeCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Company Code Currency",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInCompanyCodeCurrency": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "CompanyCodeCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Company Code Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "GlobalCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Global Currency",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInGlobalCurrency": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency1": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 1",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency1": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency1",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 1",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency2": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 2",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency2": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency2",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 2",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency3": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 3",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency3": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency3",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 3",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency4": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 4",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency4": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency4",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 4",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency5": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 5",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency5": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency5",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 5",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency6": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 6",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency6": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency6",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 6",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency7": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 7",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency7": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency7",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 7",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FreeDefinedCurrency8": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Freely Defined Currency 8",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInFreeDefinedCurrency8": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "FreeDefinedCurrency8",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Freely Defined Currency 8",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FixedAmountInGlobalCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Fixed Amount in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "GrpValnFixedAmtInGlobCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Group Val. Fixed Amount in Global Cur.",
+          "@sap.quickinfo": "Group Valuation Fixed Amount in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "PrftCtrValnFxdAmtInGlobCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "PC Val. Fixed Amount in Global Currency",
+          "@sap.quickinfo": "Profit Center Valuation Fixed Amount in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "TotalPriceVarcInGlobalCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Total Price Variance in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "GrpValnTotPrcVarcInGlobCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "GV Total Price Var. in Global Currency",
+          "@sap.quickinfo": "Group Valuation Total Price Variance in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "PrftCtrValnTotPrcVarcInGlbCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "PC Val. Total Price Var. in Global Cur.",
+          "@sap.quickinfo": "Profit Center Valuation Total Price Variance in Global Cur.",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FixedPriceVarcInGlobalCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Fixed Price Variance in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "GrpValnFixedPrcVarcInGlobCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "GV Fixed Price Var. in Global Currency",
+          "@sap.quickinfo": "Group Valuation Fixed Price Variance in Global Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "PrftCtrValnFxdPrcVarcInGlbCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "GlobalCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "PC Val. Fixed Price Var. in Global Cur.",
+          "@sap.quickinfo": "Profit Center Valuation Fixed Price Variance in Global Cur.",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FixedAmountInCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "CompanyCodeCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Fixed Amount in Company Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "ControllingObjectCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "CO Object Currency",
+          "@sap.semantics": "currency-code",
+          "notNull": false
+        },
+        "AmountInObjectCurrency": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "ControllingObjectCurrency",
+          "@sap.variable.scale": "true",
+          "@sap.label": "Amount in Object Currency",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Base Unit of Measure",
+          "@sap.semantics": "unit-of-measure",
+          "notNull": false
+        },
+        "Quantity": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "BaseUnit",
+          "@sap.label": "Quantity",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "FixedQuantity": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "BaseUnit",
+          "@sap.label": "Fixed Quantity",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "CostSourceUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Cost Source Unit",
+          "@sap.semantics": "unit-of-measure",
+          "notNull": false
+        },
+        "ValuationQuantity": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "CostSourceUnit",
+          "@sap.label": "Valuation Quantity",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "ValuationFixedQuantity": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "CostSourceUnit",
+          "@sap.label": "Valuation Fixed Quantity",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "AdditionalQuantity1Unit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Additional Quantity 1 Unit",
+          "@sap.semantics": "unit-of-measure",
+          "notNull": false
+        },
+        "AdditionalQuantity1": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "AdditionalQuantity1Unit",
+          "@sap.label": "Additional Quantity 1",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "AdditionalQuantity2Unit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Additional Quantity 2 Unit",
+          "@sap.semantics": "unit-of-measure",
+          "notNull": false
+        },
+        "AdditionalQuantity2": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "AdditionalQuantity2Unit",
+          "@sap.label": "Additional Quantity 2",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "AdditionalQuantity3Unit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Additional Quantity 3 Unit",
+          "@sap.semantics": "unit-of-measure",
+          "notNull": false
+        },
+        "AdditionalQuantity3": {
+          "type": "cds.Decimal",
+          "precision": 23,
+          "scale": 3,
+          "@sap.aggregation.role": "measure",
+          "@sap.unit": "AdditionalQuantity3Unit",
+          "@sap.label": "Additional Quantity 3",
+          "@sap.filterable": "false",
+          "notNull": false
+        },
+        "DebitCreditCode": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Debit/Credit Code",
+          "notNull": false
+        },
+        "FiscalPeriod": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Fiscal Period",
+          "notNull": false
+        },
+        "FiscalYearVariant": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Fiscal Year Variant",
+          "notNull": false
+        },
+        "FiscalYearPeriod": {
+          "type": "cds.String",
+          "length": 7,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Fiscal Year Period",
+          "notNull": false
+        },
+        "PostingDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Posting Date",
+          "notNull": false
+        },
+        "DocumentDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Journal Entry Date",
+          "notNull": false
+        },
+        "AccountingDocumentType": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Journal Entry Type",
+          "notNull": false
+        },
+        "AccountingDocumentItem": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Posting View Item",
+          "@sap.quickinfo": "Journal Entry Posting View Item",
+          "notNull": false
+        },
+        "AssignmentReference": {
+          "type": "cds.String",
+          "length": 18,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Assignment Reference",
+          "notNull": false
+        },
+        "AccountingDocumentCategory": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Journal Entry Category",
+          "notNull": false
+        },
+        "PostingKey": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Posting Key",
+          "notNull": false
+        },
+        "TransactionTypeDetermination": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Transaction Key",
+          "notNull": false
+        },
+        "SubLedgerAcctLineItemType": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "SLA Line Item Type",
+          "@sap.quickinfo": "Subledger-Specific Line Item Type",
+          "notNull": false
+        },
+        "AccountingDocCreatedByUser": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Journal Entry Created By",
+          "@sap.quickinfo": "User that created the journal entry",
+          "notNull": false
+        },
+        "LastChangeDateTime": {
+          "type": "cds.DateTime",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Last Changed At",
+          "@sap.quickinfo": "Time Stamp of Last Change",
+          "notNull": false
+        },
+        "CreationDateTime": {
+          "type": "cds.DateTime",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Creation Time",
+          "@sap.quickinfo": "Time Stamp of Creation",
+          "notNull": false
+        },
+        "CreationDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Creation Date",
+          "notNull": false
+        },
+        "EliminationProfitCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Elimination Profit Center",
+          "notNull": false
+        },
+        "OriginObjectType": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Origin Object Type",
+          "@sap.quickinfo": "Type of Origin Object",
+          "notNull": false
+        },
+        "GLAccountType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "G/L Account Type",
+          "@sap.quickinfo": "Type of a General Ledger Account",
+          "notNull": false
+        },
+        "AlternativeGLAccount": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Alternative G/L Account",
+          "@sap.quickinfo": "Alternative G/L Account Number In Company Code",
+          "notNull": false
+        },
+        "CountryChartOfAccounts": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Alternative Chart of Accounts",
+          "@sap.quickinfo": "Alternative Chart of Accounts for Country/Region",
+          "notNull": false
+        },
+        "ItemIsSplit": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Itm chngd by Doc Spl",
+          "@sap.quickinfo": "Item changed by document splitting",
+          "notNull": false
+        },
+        "InvoiceReference": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Invoice Reference",
+          "notNull": false
+        },
+        "InvoiceReferenceFiscalYear": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Invoice Reference Fiscal Year",
+          "notNull": false
+        },
+        "FollowOnDocumentType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Follow-On Document Type",
+          "notNull": false
+        },
+        "InvoiceItemReference": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Invoice Item Reference",
+          "notNull": false
+        },
+        "ReferencePurchaseOrderCategory": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Reference Purchase Order Category",
+          "@sap.quickinfo": "Category of Reference Purchase Order",
+          "notNull": false
+        },
+        "PurchasingDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Purchasing Document",
+          "notNull": false
+        },
+        "PurchasingDocumentItem": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Purchasing Doc. Item",
+          "@sap.quickinfo": "Purchasing Document Item",
+          "notNull": false
+        },
+        "AccountAssignmentNumber": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Account Assignment Number",
+          "notNull": false
+        },
+        "DocumentItemText": {
+          "type": "cds.String",
+          "length": 50,
+          "@sap.aggregation.role": "dimension",
+          "@sap.label": "Item Text",
+          "notNull": false
+        },
+        "SalesDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Sales Document",
+          "notNull": false
+        },
+        "SalesDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Sales Document Item",
+          "notNull": false
+        },
+        "Product": {
+          "type": "cds.String",
+          "length": 18,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Product",
+          "@sap.quickinfo": "Product Number",
+          "notNull": false
+        },
+        "Plant": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Plant",
+          "notNull": false
+        },
+        "Supplier": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Supplier",
+          "notNull": false
+        },
+        "Customer": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer",
+          "@sap.quickinfo": "Customer Number",
+          "notNull": false
+        },
+        "ServicesRenderedDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Serv. Rendered Date",
+          "@sap.quickinfo": "Date on which services are rendered",
+          "notNull": false
+        },
+        "ConditionContract": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Condition Contract",
+          "notNull": false
+        },
+        "FinancialAccountType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Account Type",
+          "notNull": false
+        },
+        "SpecialGLCode": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Special G/L",
+          "@sap.quickinfo": "Special G/L Indicator",
+          "notNull": false
+        },
+        "TaxCode": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Tax Code",
+          "@sap.quickinfo": "Tax on Sales/Purchases Code",
+          "notNull": false
+        },
+        "HouseBank": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "House Bank",
+          "@sap.quickinfo": "House Bank Key",
+          "notNull": false
+        },
+        "HouseBankAccount": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "House Bank Account",
+          "notNull": false
+        },
+        "IsOpenItemManaged": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Open Item Management",
+          "@sap.quickinfo": "Managed on an Open Item Basis",
+          "notNull": false
+        },
+        "ClearingDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Clearing Date",
+          "notNull": false
+        },
+        "ClearingAccountingDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Clearing Journal Entry",
+          "notNull": false
+        },
+        "ClearingDocFiscalYear": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Fiscal Year of Clearing Journal Entry",
+          "notNull": false
+        },
+        "ValueDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Value Date",
+          "notNull": false
+        },
+        "AssetDepreciationArea": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Depreciation Area",
+          "@sap.quickinfo": "Asset Depreciation Area (Real or Derived)",
+          "notNull": false
+        },
+        "MasterFixedAsset": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Fixed Asset",
+          "notNull": false
+        },
+        "FixedAsset": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Asset Subnumber",
+          "notNull": false
+        },
+        "AssetValueDate": {
+          "type": "cds.Date",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "Date",
+          "@sap.label": "Asset Value Date",
+          "notNull": false
+        },
+        "AssetTransactionType": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Ast Transaction Type",
+          "@sap.quickinfo": "Asset Transaction Type",
+          "notNull": false
+        },
+        "AssetAcctTransClassfctn": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Trans. Type Category",
+          "@sap.quickinfo": "Transaction Type Category",
+          "notNull": false
+        },
+        "DepreciationFiscalPeriod": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Depreciation Fiscal Period",
+          "@sap.quickinfo": "Fiscal Period of Depreciation",
+          "notNull": false
+        },
+        "GroupMasterFixedAsset": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Group Asset",
+          "notNull": false
+        },
+        "GroupFixedAsset": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Group Asset Subnmbr",
+          "@sap.quickinfo": "Group Asset Subnumber",
+          "notNull": false
+        },
+        "AssetClass": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Asset Class",
+          "notNull": false
+        },
+        "CostEstimate": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Cost Estimate",
+          "notNull": false
+        },
+        "InventorySpecialStockValnType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Inventory Special Stock Valuation Type",
+          "notNull": false
+        },
+        "InventorySpecialStockType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Inventory Special Stock Type",
+          "notNull": false
+        },
+        "InventorySpclStkSalesDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Inventory Special Stock Sales Document",
+          "notNull": false
+        },
+        "InventorySpclStkSalesDocItm": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Inventory Spcl Stock Sales Document Item",
+          "@sap.quickinfo": "Inventory Special Stock Sales Document Item",
+          "notNull": false
+        },
+        "InvtrySpclStockWBSElmntIntID": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Inv. Special Stock WBS Element Int. ID",
+          "@sap.quickinfo": "Inventory Special Stock WBS Element Internal ID",
+          "notNull": false
+        },
+        "InventorySpecialStockSupplier": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Inventory Special Stock Supplier",
+          "@sap.quickinfo": "Supplier of Inventory Special Stock",
+          "notNull": false
+        },
+        "InventoryValuationType": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Inventory Valuation Type",
+          "notNull": false
+        },
+        "ValuationArea": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Valuation Area",
+          "notNull": false
+        },
+        "CostOriginGroup": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Origin Group",
+          "@sap.quickinfo": "Origin Group as Subdivision of Cost Element",
+          "notNull": false
+        },
+        "OriginSenderObject": {
+          "type": "cds.String",
+          "length": 22,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Origin Sender Object",
+          "notNull": false
+        },
+        "ControllingObjectDebitType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Controlling Object Debit Type",
+          "notNull": false
+        },
+        "QuantityIsIncomplete": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Qty Is Incomplete",
+          "@sap.quickinfo": "Indicator: Quantity Is Incomplete",
+          "notNull": false
+        },
+        "OffsettingAccount": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Offsetting Account",
+          "notNull": false
+        },
+        "OffsettingAccountType": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Offsetting Account Type",
+          "notNull": false
+        },
+        "OffsettingChartOfAccounts": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Offsetting Chart of Accounts",
+          "notNull": false
+        },
+        "LineItemIsCompleted": {
+          "type": "cds.Boolean",
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Line Item is Completed",
+          "@sap.quickinfo": "Indicator: Line Item is Completed",
+          "notNull": false
+        },
+        "PersonnelNumber": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Personnel Number",
+          "notNull": false
+        },
+        "ControllingObjectClass": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Controlling Object Class",
+          "notNull": false
+        },
+        "PartnerCompanyCode": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Company Code",
+          "notNull": false
+        },
+        "PartnerControllingObjectClass": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Controlling Object Class",
+          "notNull": false
+        },
+        "OriginCostCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Origin Cost Center",
+          "notNull": false
+        },
+        "OriginProfitCenter": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Origin Profit Center",
+          "notNull": false
+        },
+        "OriginCostCtrActivityType": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Origin Cost Center Activity Type",
+          "notNull": false
+        },
+        "AccountAssignment": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Account Assignment",
+          "notNull": false
+        },
+        "AccountAssignmentType": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Account Assignment Type",
+          "notNull": false
+        },
+        "CostCtrActivityType": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Activity Type",
+          "notNull": false
+        },
+        "OrderID": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Order ID",
+          "notNull": false
+        },
+        "OrderCategory": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Order Category",
+          "notNull": false
+        },
+        "WBSElementInternalID": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "WBS Element Internal ID",
+          "notNull": false
+        },
+        "PartnerWBSElementInternalID": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Partner WBS Element Internal ID",
+          "notNull": false
+        },
+        "ProjectInternalID": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Project Internal ID",
+          "notNull": false
+        },
+        "PartnerProjectInternalID": {
+          "type": "cds.String",
+          "length": 8,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Partner Project Internal ID",
+          "notNull": false
+        },
+        "OperatingConcern": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Operating Concern",
+          "notNull": false
+        },
+        "ProjectNetwork": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Network",
+          "@sap.quickinfo": "Network Number for Account Assignment",
+          "notNull": false
+        },
+        "BusinessProcess": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Business Process",
+          "notNull": false
+        },
+        "CostObject": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Cost Object",
+          "notNull": false
+        },
+        "BillableControl": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Billable Control",
+          "notNull": false
+        },
+        "CostAnalysisResource": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Cost Analysis Resource",
+          "notNull": false
+        },
+        "CustomerServiceNotification": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer Service Notification",
+          "notNull": false
+        },
+        "ServiceDocumentType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Service Doc. Type",
+          "@sap.quickinfo": "Service Document Type",
+          "notNull": false
+        },
+        "ServiceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Service Document",
+          "@sap.quickinfo": "Service Document ID",
+          "notNull": false
+        },
+        "ServiceDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Service Doc. Item",
+          "@sap.quickinfo": "Service Document Item ID",
+          "notNull": false
+        },
+        "PartnerServiceDocumentType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Service Document Type",
+          "notNull": false
+        },
+        "PartnerServiceDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Service Document",
+          "notNull": false
+        },
+        "PartnerServiceDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Partner Service Document Item",
+          "notNull": false
+        },
+        "ServiceContractType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Serv. Contract Type",
+          "@sap.quickinfo": "Service Contract Type",
+          "notNull": false
+        },
+        "ServiceContract": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Service Contract",
+          "@sap.quickinfo": "Service Contract ID",
+          "notNull": false
+        },
+        "ServiceContractItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Srv Contract Item",
+          "@sap.quickinfo": "Service Contract Item ID",
+          "notNull": false
+        },
+        "TimeSheetOvertimeCategory": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Overtime Category",
+          "notNull": false
+        },
+        "PartnerAccountAssignment": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Account Assignment",
+          "notNull": false
+        },
+        "PartnerAccountAssignmentType": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Account Assignment Type",
+          "notNull": false
+        },
+        "PartnerCostCtrActivityType": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Cost Center Activity Type",
+          "notNull": false
+        },
+        "PartnerOrder": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Order",
+          "notNull": false
+        },
+        "PartnerOrderCategory": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Partner Order Cat.",
+          "@sap.quickinfo": "Partner Order Category",
+          "notNull": false
+        },
+        "PartnerSalesDocument": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Sales Doc.",
+          "@sap.quickinfo": "Partner Sales Document",
+          "notNull": false
+        },
+        "PartnerSalesDocumentItem": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Partner Sales Document Item",
+          "notNull": false
+        },
+        "PartnerProjectNetwork": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Project Network",
+          "notNull": false
+        },
+        "PartnerBusinessProcess": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Business Process",
+          "notNull": false
+        },
+        "PartnerCostObject": {
+          "type": "cds.String",
+          "length": 12,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Partner Cost Object",
+          "notNull": false
+        },
+        "ControllingDocumentItem": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Controlling Doc Item",
+          "@sap.quickinfo": "Controlling Document Item",
+          "notNull": false
+        },
+        "BillingDocumentType": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Billing Type",
+          "notNull": false
+        },
+        "SalesOrganization": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Sales Organization",
+          "notNull": false
+        },
+        "DistributionChannel": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Distribution Channel",
+          "notNull": false
+        },
+        "OrganizationDivision": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Division",
+          "notNull": false
+        },
+        "SoldProduct": {
+          "type": "cds.String",
+          "length": 18,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Product Sold",
+          "notNull": false
+        },
+        "SoldProductGroup": {
+          "type": "cds.String",
+          "length": 9,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Product Sold Group",
+          "notNull": false
+        },
+        "CustomerGroup": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer Group",
+          "notNull": false
+        },
+        "CustomerSupplierCountry": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer or Supplier Country/Region",
+          "notNull": false
+        },
+        "CustomerSupplierIndustry": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer Supplier Industry",
+          "notNull": false
+        },
+        "SalesDistrict": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Sales District",
+          "notNull": false
+        },
+        "BillToParty": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Bill-to Party",
+          "notNull": false
+        },
+        "ShipToParty": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Ship-to Party",
+          "notNull": false
+        },
+        "CustomerSupplierCorporateGroup": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.aggregation.role": "dimension",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Customer Supplier Corporate Group",
+          "notNull": false
+        }
+      }
+    }
+  }
+}

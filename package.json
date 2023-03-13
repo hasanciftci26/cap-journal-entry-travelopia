@@ -1,0 +1,118 @@
+{
+  "name": "journal-entry-event",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^3.0.1",
+    "@sap-cloud-sdk/http-client": "^3.0.1",
+    "@sap/cds": "^6",
+    "@sap/xb-msg-amqp-v100": "^0.9.58",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "hdb": "^0.19.0",
+    "passport": "^0",
+    "soap": "^1.0.0"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds run"
+  },
+  "engines": {
+    "node": "^16.15"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "API_BILLING_DOCUMENT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BILLING_DOCUMENT_SRV",
+        "credentials": {
+          "destination": "S4HC_BILLING_DOC",
+          "path": "/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV",
+          "requestTimeout": "300000"
+        },
+        "destinationOptions": {
+          "useCache": true,
+          "cacheVerificationKeys": true
+        }
+      },
+      "API_GLACCOUNTLINEITEM": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_GLACCOUNTLINEITEM",
+        "credentials": {
+          "destination": "S4HC_GLACCOUNT",
+          "path": "/sap/opu/odata/sap/API_GLACCOUNTLINEITEM",
+          "requestTimeout": "300000"
+        },
+        "destinationOptions": {
+          "useCache": true,
+          "cacheVerificationKeys": true
+        }
+      },
+      "API_SUPPLIERINVOICE_PROCESS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_SUPPLIERINVOICE_PROCESS_SRV",
+        "credentials": {
+          "destination": "S4HC_SUPPLIER_INVOICE",
+          "path": "/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV",
+          "requestTimeout": "300000"
+        },
+        "destinationOptions": {
+          "useCache": true,
+          "cacheVerificationKeys": true
+        }
+      },
+      "JOURNAL_ENTRY_CHANGE": {
+        "kind": "SOAP",
+        "credentials": {
+          "destination": "S4HC_JOURNAL_ENTRY_SRV",
+          "path": "/sap/bc/srt/scs_ext/sap/journalentrybulkchangerequest_"
+        },
+        "destinationOptions": {
+          "useCache": true,
+          "cacheVerificationKeys": true
+        }
+      },
+      "db": {
+        "kind": "hana-cloud"
+      },
+      "messaging": {
+        "kind": "enterprise-messaging-shared",
+        "format": "cloudevents",
+        "subscribePrefix": "sap/S4HANAOD/jems"
+      }
+    }
+  }
+}

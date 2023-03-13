@@ -1,0 +1,7 @@
+{
+  "xsappname": "journal-entry-event",
+  "tenant-mode": "dedicated",
+  "scopes": [],
+  "attributes": [],
+  "role-templates": []
+}

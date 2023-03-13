@@ -1,0 +1,72 @@
+_schema-version: '3.1'
+ID: journal-entry-event
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx -p @sap/cds-dk cds build --production
+modules:
+  - name: journal-entry-event-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: journal-entry-event-auth
+      - name: journal-entry-event-db     
+      - name: journal-entry-event-messaging
+      - name: journal-entry-event-dest
+
+  - name: journal-entry-event-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: journal-entry-event-db
+        properties:
+          TARGET_CONTAINER: ~{hdi-container-name}       
+
+resources:
+  - name: journal-entry-event-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+  - name: journal-entry-event-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-container-name: ${service-name}      
+  - name: journal-entry-event-messaging
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./enterprise-messaging.json
+      service: enterprise-messaging
+      service-plan: default
+  - name: journal-entry-event-dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: journal-entry-event-dest
+      service-plan: lite

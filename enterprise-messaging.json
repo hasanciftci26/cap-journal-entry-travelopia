@@ -1,0 +1,22 @@
+{
+    "emname": "journal-ems",
+    "namespace": "sap/S4HANAOD/journal-ems",
+    "version": "1.1.0",
+    "options": {
+        "management": true,
+        "messagingrest": true,
+        "messaging": true
+    },
+    "rules": {
+        "queueRules": {
+            "subscribeFilter": [
+                "${namespace}/*"
+            ]
+        },
+        "topicRules": {
+            "subscribeFilter": [
+                "sap/S4HANAOD/jems/*"
+            ]
+        }
+    }
+}
