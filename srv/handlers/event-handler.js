@@ -17,7 +17,7 @@ class JournalEventHandler {
             aGLAccountLineItems = await this.#getGLAccountLineItem(message);
             oGLAccountLineItem = aGLAccountLineItems[0];
             oReferenceFields = await this.#getReferenceFields(oGLAccountLineItem);
-            await this.#runJournalEntryUpdate(message, oReferenceFields);
+            await this.#runJournalEntryUpdate(aGLAccountLineItems, oReferenceFields, message);
         } catch (error) {
             oLogMessage.message = error.message;
             oLogMessage.isUpdatedSuccessfully = false;
@@ -89,56 +89,92 @@ class JournalEventHandler {
         return oReferenceFields;
     }
 
-    async #runJournalEntryUpdate(message, oReferenceFields) {
-        let oJournalEntryServiceEndpoint = { url: null };
+    async #runJournalEntryUpdate(aGLAccountLineItems, oReferenceFields, message) {
+        let oJournalEntryServiceEndpoint = { url: null },
+            oResponse = {},
+            sDate = new Date().toISOString(),
+            rRegex = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})Z/,
+            sMessageHeaderID = sDate.replace(rRegex, "$1$2$3_$4$5$6_") + aGLAccountLineItems[0].AccountingDocument,
+            oBody = {
+                MessageHeader: {
+                    ID: sMessageHeaderID,
+                    CreationDateTime: sDate
+                },
+                JournalEntryGLItem: [],
+                JournalEntryDebtorCreditorItem: []
+            };
         const oSOAPClient = new SOAPClient(),
             oJournalEntryService = await oSOAPClient.getSoapService("JOURNAL_ENTRY_CHANGE",
                 "./srv/external/JOURNALENTRYBULKCHANGEREQUEST_.wsdl",
                 oJournalEntryServiceEndpoint
-            ),
-            // Set the parameters for the JournalEntryBulkChangeRequest_In method of the sevice 
-            oBody = {
-                MessageHeader: {
-                    ID: "POCTest001",
-                    CreationDateTime: "2023-01-09T17:08:00.1234567Z"
-                },
-                JournalEntryGLItem: {
-                    MessageHeader: {
-                        ID: "MSG_ITM_ML001",
-                        CreationDateTime: "2023-01-09T17:08:00.1234567Z"
-                    },
-                    ItemKey: {
-                        AccountingDocument: message.accountingDocument,
-                        CompanyCode: message.companyCode,
-                        FiscalYear: message.fiscalYear,
-                        AccountingDocumentItemID: "001"
-                    },
-                    Reference2IDByBusinessPartnerChange: {
-                        Reference2IDByBusinessPartner: oReferenceFields.XREF2
-                    },
-                    Reference3IDByBusinessPartnerChange: {
-                        Reference3IDByBusinessPartner: oReferenceFields.XREF3
-                    }
-                },
-                JournalEntryDebtorCreditorItem: {
-                    MessageHeader: {
-                        ID: "MSG_ITM_ML001",
-                        CreationDateTime: "2023-01-09T17:08:00.1234567Z"
-                    },
-                    ItemKey: {
-                        AccountingDocument: message.accountingDocument,
-                        CompanyCode: message.companyCode,
-                        FiscalYear: message.fiscalYear,
-                        AccountingDocumentItemID: "001"
-                    },
-                    Reference2IDByBusinessPartnerChange: {
-                        Reference2IDByBusinessPartner: oReferenceFields.XREF2
-                    },
-                    Reference3IDByBusinessPartnerChange: {
-                        Reference3IDByBusinessPartner: oReferenceFields.XREF3
-                    }
-                }
-            };
+            );
+
+        if (!oReferenceFields.hasOwnProperty("XREF2")) {
+            return;
+        }
+
+        aGLAccountLineItems.forEach((lineItem) => {
+            let sAccountingDocumentItem = lineItem.AccountingDocumentItem;
+
+            while (sAccountingDocumentItem.length < 3) {
+                sAccountingDocumentItem = "0" + sAccountingDocumentItem;
+            }
+
+            switch (lineItem.GLAccount) {
+                case "12100000":
+                    oBody.JournalEntryDebtorCreditorItem.push({
+                        MessageHeader: {
+                            ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
+                            CreationDateTime: sDate
+                        },
+                        ItemKey: {
+                            AccountingDocument: lineItem.AccountingDocument,
+                            CompanyCode: lineItem.CompanyCode,
+                            FiscalYear: lineItem.FiscalYear,
+                            AccountingDocumentItemID: sAccountingDocumentItem
+                        },
+                        Reference2IDByBusinessPartnerChange: {
+                            Reference2IDByBusinessPartner: oReferenceFields.XREF2,
+                            FieldValueChangeIsRequested: true
+                        },
+                        Reference3IDByBusinessPartnerChange: {
+                            Reference3IDByBusinessPartner: oReferenceFields.XREF3,
+                            FieldValueChangeIsRequested: true
+                        }
+                    });
+                    break;
+                case "12540000":
+                    oBody.JournalEntryGLItem.push({
+                        MessageHeader: {
+                            ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
+                            CreationDateTime: sDate
+                        },
+                        ItemKey: {
+                            AccountingDocument: lineItem.AccountingDocument,
+                            CompanyCode: lineItem.CompanyCode,
+                            FiscalYear: lineItem.FiscalYear,
+                            AccountingDocumentItemID: sAccountingDocumentItem
+                        },
+                        Reference2IDByBusinessPartnerChange: {
+                            Reference2IDByBusinessPartner: oReferenceFields.XREF2,
+                            FieldValueChangeIsRequested: true
+                        },
+                        Reference3IDByBusinessPartnerChange: {
+                            Reference3IDByBusinessPartner: oReferenceFields.XREF3,
+                            FieldValueChangeIsRequested: true
+                        }
+                    });
+                    break;
+            }
+        });
+
+        if (!oBody.JournalEntryGLItem.length) {
+            delete oBody.JournalEntryGLItem;
+        }
+
+        if (!oBody.JournalEntryDebtorCreditorItem.length) {
+            delete oBody.JournalEntryDebtorCreditorItem;
+        }
 
         try {
             oJournalEntryService.setEndpoint(oJournalEntryServiceEndpoint.url);
@@ -147,9 +183,9 @@ class JournalEventHandler {
             oJournalEntryService.addSoapHeader({
                 messageId: "urn:uuid:" + message.ID
             }, undefined, undefined, "http://www.w3.org/2005/08/addressing");
-            
+
             // Invoke JournalEntryBulkChangeRequest_In method asynchronously and wait for the response
-            await oJournalEntryService.JournalEntryBulkChangeRequest_InAsync(oBody);
+            oResponse = await oJournalEntryService.JournalEntryBulkChangeRequest_InAsync(oBody);
         } catch (error) {
             throw error;
         }
