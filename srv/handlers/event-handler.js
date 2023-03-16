@@ -120,51 +120,48 @@ class JournalEventHandler {
                 sAccountingDocumentItem = "0" + sAccountingDocumentItem;
             }
 
-            switch (lineItem.GLAccount) {
-                case "12100000":
-                    oBody.JournalEntryDebtorCreditorItem.push({
-                        MessageHeader: {
-                            ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
-                            CreationDateTime: sDate
-                        },
-                        ItemKey: {
-                            AccountingDocument: lineItem.AccountingDocument,
-                            CompanyCode: lineItem.CompanyCode,
-                            FiscalYear: lineItem.FiscalYear,
-                            AccountingDocumentItemID: sAccountingDocumentItem
-                        },
-                        Reference2IDByBusinessPartnerChange: {
-                            Reference2IDByBusinessPartner: oReferenceFields.XREF2,
-                            FieldValueChangeIsRequested: true
-                        },
-                        Reference3IDByBusinessPartnerChange: {
-                            Reference3IDByBusinessPartner: oReferenceFields.XREF3,
-                            FieldValueChangeIsRequested: true
-                        }
-                    });
-                    break;
-                case "12540000":
-                    oBody.JournalEntryGLItem.push({
-                        MessageHeader: {
-                            ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
-                            CreationDateTime: sDate
-                        },
-                        ItemKey: {
-                            AccountingDocument: lineItem.AccountingDocument,
-                            CompanyCode: lineItem.CompanyCode,
-                            FiscalYear: lineItem.FiscalYear,
-                            AccountingDocumentItemID: sAccountingDocumentItem
-                        },
-                        Reference2IDByBusinessPartnerChange: {
-                            Reference2IDByBusinessPartner: oReferenceFields.XREF2,
-                            FieldValueChangeIsRequested: true
-                        },
-                        Reference3IDByBusinessPartnerChange: {
-                            Reference3IDByBusinessPartner: oReferenceFields.XREF3,
-                            FieldValueChangeIsRequested: true
-                        }
-                    });
-                    break;
+            if (lineItem.PostingKey == "40" || lineItem.PostingKey == "50") {
+                oBody.JournalEntryGLItem.push({
+                    MessageHeader: {
+                        ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
+                        CreationDateTime: sDate
+                    },
+                    ItemKey: {
+                        AccountingDocument: lineItem.AccountingDocument,
+                        CompanyCode: lineItem.CompanyCode,
+                        FiscalYear: lineItem.FiscalYear,
+                        AccountingDocumentItemID: sAccountingDocumentItem
+                    },
+                    Reference2IDByBusinessPartnerChange: {
+                        Reference2IDByBusinessPartner: oReferenceFields.XREF2,
+                        FieldValueChangeIsRequested: true
+                    },
+                    Reference3IDByBusinessPartnerChange: {
+                        Reference3IDByBusinessPartner: oReferenceFields.XREF3,
+                        FieldValueChangeIsRequested: true
+                    }
+                });
+            } else {
+                oBody.JournalEntryDebtorCreditorItem.push({
+                    MessageHeader: {
+                        ID: sMessageHeaderID + "_" + sAccountingDocumentItem,
+                        CreationDateTime: sDate
+                    },
+                    ItemKey: {
+                        AccountingDocument: lineItem.AccountingDocument,
+                        CompanyCode: lineItem.CompanyCode,
+                        FiscalYear: lineItem.FiscalYear,
+                        AccountingDocumentItemID: sAccountingDocumentItem
+                    },
+                    Reference2IDByBusinessPartnerChange: {
+                        Reference2IDByBusinessPartner: oReferenceFields.XREF2,
+                        FieldValueChangeIsRequested: true
+                    },
+                    Reference3IDByBusinessPartnerChange: {
+                        Reference3IDByBusinessPartner: oReferenceFields.XREF3,
+                        FieldValueChangeIsRequested: true
+                    }
+                });
             }
         });
 
